@@ -11,9 +11,9 @@ the visualization power of Kibana.
 
 **This version has [Search Guard support](https://github.com/floragunncom/search-guard).**
 
-> :information_source: The Docker images backing this stack include [Stack Features][stack-features] (formerly X-Pack)
+*:information_source: The Docker images backing this stack include [Stack Features][stack-features] (formerly X-Pack)
 and have Search Guard [Enterprise features][paid-features] enabled by default (see [How to disable paid
-features](#how-to-disable-paid-features) to disable them). The [trial license][trial-license] is valid for 30 days.
+features](#how-to-disable-paid-features) to disable them). The [trial license][trial-license] is valid for 30 days.*
 
 Based on the official Docker images from Elastic:
 
@@ -71,8 +71,8 @@ and description of the built-in Search Guard users.**
 * [Docker Compose](https://docs.docker.com/compose/install/) version **1.20.0** or newer
 * 1.5 GB of RAM
 
-> :information_source: Especially on Linux, make sure your user has the [required permissions][linux-postinstall] to
-> interact with the Docker daemon.
+*:information_source: Especially on Linux, make sure your user has the [required permissions][linux-postinstall] to
+interact with the Docker daemon.*
 
 By default, the stack exposes the following ports:
 * 5000: Logstash TCP input
@@ -80,9 +80,9 @@ By default, the stack exposes the following ports:
 * 9300: Elasticsearch TCP transport
 * 5601: Kibana
 
-> :warning: Elasticsearch's [bootstrap checks][booststap-checks] were purposely disabled to facilitate the setup of the
-> Elastic stack in development environments. For production setups, we recommend users to set up their host according to
-> the instructions from the Elasticsearch documentation: [Important System Configuration][es-sys-config].
+**:warning: Elasticsearch's [bootstrap checks][booststap-checks] were purposely disabled to facilitate the setup of the
+Elastic stack in development environments. For production setups, we recommend users to set up their host according to
+the instructions from the Elasticsearch documentation: [Important System Configuration][es-sys-config].**
 
 ### SELinux
 
@@ -118,7 +118,8 @@ $ docker-compose up
 
 You can also run all services in the background (detached mode) by adding the `-d` flag to the above command.
 
-> :warning: You must run `docker-compose build` first whenever you switch branch or update a base image.
+**:warning: You must rebuild the stack images with `docker-compose build` whenever you switch branch or update the
+version of an already existing stack.**
 
 If you are starting the stack for the very first time, please read the section below attentively.
 
@@ -136,7 +137,7 @@ $ docker-compose down -v
 
 ### Setting up user authentication
 
-> :information_source: Refer to [How to disable paid features](#how-to-disable-paid-features) to disable authentication.
+*:information_source: Refer to [How to disable paid features](#how-to-disable-paid-features) to disable authentication.*
 
 Search Guard must be initialized after Elasticsearch is started:
 
@@ -176,8 +177,8 @@ When Kibana launches for the first time, it is not configured with any index pat
 
 #### Via the Kibana web UI
 
-> :information_source: You need to inject data into Logstash before being able to configure a Logstash index pattern via
-the Kibana web UI.
+*:information_source: You need to inject data into Logstash before being able to configure a Logstash index pattern via
+the Kibana web UI.*
 
 Navigate to the _Discover_ view of Kibana from the left sidebar. You will be prompted to create an index pattern. Enter
 `logstash-*` to match Logstash indices then, on the next page, select `@timestamp` as the time filter field. Finally,
@@ -198,12 +199,13 @@ $ curl -XPOST -D- 'http://localhost:5601/api/saved_objects/index-pattern' \
     -d '{"attributes":{"title":"logstash-*","timeFieldName":"@timestamp"}}'
 ```
 
-The created pattern will automatically be marked as the default index pattern as soon as the Kibana UI is opened for the first time.
+The created pattern will automatically be marked as the default index pattern as soon as the Kibana UI is opened for the
+first time.
 
 ## Configuration
 
-> :information_source: Configuration is not dynamically reloaded, you will need to restart individual components after
-any configuration change.
+*:information_source: Configuration is not dynamically reloaded, you will need to restart individual components after
+any configuration change.*
 
 ### How to configure Elasticsearch
 
@@ -350,8 +352,8 @@ If all components get deployed without any error, the following command will sho
 $ docker stack services elk
 ```
 
-> :information_source: To scale Elasticsearch in Swarm mode, configure *zen* to use the DNS name `tasks.elasticsearch`
-instead of `elasticsearch`.
+*:information_source: To scale Elasticsearch in Swarm mode, configure *zen* to use the DNS name `tasks.elasticsearch`
+instead of `elasticsearch`.*
 
 
 [elk-stack]: https://www.elastic.co/elk-stack
